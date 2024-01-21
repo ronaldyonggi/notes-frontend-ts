@@ -1,4 +1,5 @@
 import { useState } from "react"
+import AddNoteForm from "./components/AddNoteForm"
 import Note from "./components/Note"
 import { NoteType } from "./types/note"
 
@@ -31,6 +32,7 @@ const App = () => {
           <Note key={note.id} note={note} />
         ))}
       </ul>
+      <AddNoteForm notes={notes} setNotes={setNotes} />
     </div>
   )
 }
