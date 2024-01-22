@@ -23,12 +23,20 @@ const App = () => {
   ]
 
   const [notes, setNotes] = useState<NoteType[]>(initialNotes);
+  const [showAll, setShowAll] = useState(true)
+
+  const notesToShow = showAll ? notes : notes.filter(note => note.important)
 
   return (
     <div>
       <h1>Notes</h1>
+      <div>
+        <button onClick={() => setShowAll(!showAll)}>
+          show {showAll ? 'only important notes' : 'all'}
+        </button>
+      </div>
       <ul>
-        {notes.map(note => (
+        {notesToShow.map(note => (
           <Note key={note.id} note={note} />
         ))}
       </ul>
