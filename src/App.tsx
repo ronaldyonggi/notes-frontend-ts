@@ -1,31 +1,20 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AddNoteForm from "./components/AddNoteForm"
 import Note from "./components/Note"
 import { NoteType } from "./types/note"
+import axios from "axios"
 
 const App = () => {
-  const initialNotes = [
-    {
-      id: 1,
-      content: 'HTML is easy',
-      important: true
-    },
-    {
-      id: 2,
-      content: 'Browser can execute only JavaScript',
-      important: false
-    },
-    {
-      id: 3,
-      content: 'GET and POST are the most important methods of HTTP protocol',
-      important: true
-    }
-  ]
-
-  const [notes, setNotes] = useState<NoteType[]>(initialNotes);
+  const [notes, setNotes] = useState<NoteType[]>([]);
   const [showAll, setShowAll] = useState(true)
 
   const notesToShow = showAll ? notes : notes.filter(note => note.important)
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/notes')
+      .then(res => setNotes(res.data))
+  }, [])
 
   return (
     <div>
