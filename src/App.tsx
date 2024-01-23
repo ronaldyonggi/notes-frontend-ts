@@ -3,6 +3,7 @@ import AddNoteForm from "./components/AddNoteForm"
 import Note from "./components/Note"
 import { NoteType } from "./types/note"
 import noteService from './services/notes'
+import IndividualNote from "./components/IndividualNote"
 
 const App = () => {
   const [notes, setNotes] = useState<NoteType[]>([]);
@@ -26,7 +27,7 @@ const App = () => {
       </div>
       <ul>
         {notesToShow.map(note => (
-          <Note key={note.id} note={note} />
+          <IndividualNote key={note.id} note={note} />
         ))}
       </ul>
       <AddNoteForm notes={notes} setNotes={setNotes} />
