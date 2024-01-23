@@ -1,9 +1,9 @@
 import { SyntheticEvent, useState } from "react"
-import { NoteType } from "../types/note";
+import { Note } from "../types/note";
 
 interface AddNoteFormProps {
-  notes: NoteType[]
-  setNotes: React.Dispatch<React.SetStateAction<NoteType[]>>;
+  notes: Note[]
+  setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
 }
 
 const AddNoteForm = ({ notes, setNotes  }: AddNoteFormProps) => {
