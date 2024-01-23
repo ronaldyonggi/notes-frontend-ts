@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import AddNoteForm from "./components/AddNoteForm"
 import Note from "./components/Note"
 import { NoteType } from "./types/note"
-import axios from "axios"
+import noteService from './services/notes'
 
 const App = () => {
   const [notes, setNotes] = useState<NoteType[]>([]);
@@ -11,8 +11,8 @@ const App = () => {
   const notesToShow = showAll ? notes : notes.filter(note => note.important)
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/notes')
+    noteService
+      .getAll()
       .then(res => setNotes(res.data))
   }, [])
 
