@@ -3,3 +3,5 @@ export interface Note {
   content: string,
   important: boolean
 }
+
+export type NewNote = Omit<Note, 'id'>
