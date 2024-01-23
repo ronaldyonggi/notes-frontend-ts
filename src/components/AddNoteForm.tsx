@@ -1,5 +1,6 @@
 import { SyntheticEvent, useState } from "react"
 import { Note } from "../types/note";
+import noteService from '../services/notes'
 
 interface AddNoteFormProps {
   notes: Note[]
@@ -15,10 +16,11 @@ const AddNoteForm = ({ notes, setNotes  }: AddNoteFormProps) => {
     const newNoteObject = {
       content: newNote,
       important: Math.random() < 0.5,
-      id: notes.length + 1
     }
 
-    setNotes(notes.concat(newNoteObject))
+    noteService
+      .create(newNoteObject)
+      .then(res => setNotes(notes.concat(res.data)))
   }
 
   return (
