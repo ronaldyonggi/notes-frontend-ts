@@ -16,6 +16,25 @@ const App = () => {
       .then(res => setNotes(res.data))
   }, [])
 
+  const toggleImportance = (id: number): void => {
+    // First find the note that matches the id
+    const matchedNote = notes.find(note => note.id === id)
+    // Then create the updated note
+    if (matchedNote) {
+      const updatedNote = {
+        ...matchedNote,
+        important: !matchedNote.important
+      }
+      // Then call put
+      noteService
+        .update(id, updatedNote)
+        .then(res => {
+          setNotes(notes.map(note => note.id === id ? res.data : note))
+        })
+    }
+
+  }
+
   return (
     <div>
       <h1>Notes</h1>
@@ -26,7 +45,7 @@ const App = () => {
       </div>
       <ul>
         {notesToShow.map(note => (
-          <IndividualNote key={note.id} note={note} />
+          <IndividualNote key={note.id} note={note} toggleImportance={() => toggleImportance(note.id)} />
         ))}
       </ul>
       <AddNoteForm notes={notes} setNotes={setNotes} />
