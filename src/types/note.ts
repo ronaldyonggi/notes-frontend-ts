@@ -1,4 +1,4 @@
-export interface NoteType {
+export interface Note {
   id: number,
   content: string,
   important: boolean
