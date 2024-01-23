@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react"
 import AddNoteForm from "./components/AddNoteForm"
-import Note from "./components/Note"
-import { NoteType } from "./types/note"
+import { Note } from "./types/note"
 import noteService from './services/notes'
 import IndividualNote from "./components/IndividualNote"
 
 const App = () => {
-  const [notes, setNotes] = useState<NoteType[]>([]);
+  const [notes, setNotes] = useState<Note[]>([]);
   const [showAll, setShowAll] = useState(true)
 
   const notesToShow = showAll ? notes : notes.filter(note => note.important)
