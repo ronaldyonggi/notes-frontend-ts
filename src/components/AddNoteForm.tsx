@@ -21,6 +21,8 @@ const AddNoteForm = ({ notes, setNotes  }: AddNoteFormProps) => {
     noteService
       .create(newNoteObject)
       .then(res => setNotes(notes.concat(res.data)))
+
+    setNewNote('')
   }
 
   return (
