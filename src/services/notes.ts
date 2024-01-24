@@ -1,6 +1,6 @@
 import axios from "axios"
 import { Note } from "../types/note"
-const baseUrl = 'http://localhost:3001/notes'
+const baseUrl = 'http://localhost:3001/api/notes'
 
 const getAll = () => {
   return axios.get<Note[]>(baseUrl)
