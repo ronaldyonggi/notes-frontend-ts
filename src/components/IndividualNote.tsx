@@ -1,5 +1,4 @@
 import { Note } from "../types/note";
-import noteService from '../services/notes'
 
 interface NoteProps {
   note: Note;
@@ -18,7 +17,7 @@ const IndividualNote = ({ note, toggleImportance, handleDelete }: NoteProps) => 
   return (
     <li>
       {note.content}
-      <button onClick={toggleImportance}>{label}</button>
+      <button onClick={() => toggleImportance(note.id)}>{label}</button>
       <button onClick={handleDeleteClick}>delete</button>
     </li>
   )
