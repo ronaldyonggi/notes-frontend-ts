@@ -10,7 +10,7 @@ const create = (newObject: object) => {
   return axios.post<Note>(baseUrl, newObject)
 }
 
-const update = (id: number, newObject: object) => {
+const update = (id: string, newObject: object) => {
   return axios.put<Note>(`${baseUrl}/${id}`, newObject)
 }
 
