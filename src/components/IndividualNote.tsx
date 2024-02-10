@@ -3,9 +3,7 @@ import noteService from '../services/notes'
 
 interface NoteProps {
   note: Note;
-  toggleImportance: () => void;
-  notes: Note[]
-  setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
+  toggleImportance: (id: string) => void;
 }
 
 const IndividualNote = ({ note, toggleImportance, notes, setNotes }: NoteProps) => {
