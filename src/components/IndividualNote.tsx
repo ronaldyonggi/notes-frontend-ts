@@ -4,6 +4,7 @@ import noteService from '../services/notes'
 interface NoteProps {
   note: Note;
   toggleImportance: (id: string) => void;
+  handleDelete: (id: string) => void
 }
 
 const IndividualNote = ({ note, toggleImportance, notes, setNotes }: NoteProps) => {
