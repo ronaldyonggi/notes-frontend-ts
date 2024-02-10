@@ -7,16 +7,12 @@ interface NoteProps {
   handleDelete: (id: string) => void
 }
 
-const IndividualNote = ({ note, toggleImportance, notes, setNotes }: NoteProps) => {
+const IndividualNote = ({ note, toggleImportance, handleDelete }: NoteProps) => {
   const label = note.important
   ? 'make not important' : 'make important'
 
   const handleDeleteClick = () => {
-    noteService.deleteNote(note.id)
-      .then(() => {
-        console.log(`Successfully deleted ${note.id}`)
-        setNotes(notes.filter(n => n.id !== note.id))
-      })
+    handleDelete(note.id)
   }
 
   return (
