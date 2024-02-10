@@ -14,9 +14,14 @@ const update = (id: number, newObject: object) => {
   return axios.put<Note>(`${baseUrl}/${id}`, newObject)
 }
 
+const deleteNote = (id: string) => {
+  return axios.delete<Note>(`${baseUrl}/${id}`)
+}
+
 export default {
   getAll,
   create,
-  update
+  update,
+  deleteNote
 }
 
