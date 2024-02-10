@@ -32,7 +32,15 @@ const App = () => {
           setNotes(notes.map(note => note.id === id ? res.data : note))
         })
     }
+  }
 
+  const handleDelete = (id: string) => {
+    noteService.deleteNote(id)
+      .then(() => {
+        console.log(`Successfully deleted ${id}`)
+        setNotes(notes.filter(n => n.id !== id))
+      })
+      .catch((error: Error) => console.error(error))
   }
 
   return (
@@ -45,7 +53,7 @@ const App = () => {
       </div>
       <ul>
         {notesToShow.map(note => (
-          <IndividualNote key={note.id} note={note} toggleImportance={() => toggleImportance(note.id)} notes={notes} setNotes={setNotes} />
+          <IndividualNote key={note.id} note={note} toggleImportance={toggleImportance} handleDelete={handleDelete} />
         ))}
       </ul>
       <AddNoteForm notes={notes} setNotes={setNotes} />
