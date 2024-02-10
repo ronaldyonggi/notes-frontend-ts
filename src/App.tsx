@@ -16,7 +16,7 @@ const App = () => {
       .then(res => setNotes(res.data))
   }, [])
 
-  const toggleImportance = (id: number): void => {
+  const toggleImportance = (id: string): void => {
     // First find the note that matches the id
     const matchedNote = notes.find(note => note.id === id)
     // Then create the updated note
