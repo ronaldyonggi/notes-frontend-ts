@@ -45,7 +45,7 @@ const App = () => {
       </div>
       <ul>
         {notesToShow.map(note => (
-          <IndividualNote key={note.id} note={note} toggleImportance={() => toggleImportance(note.id)} />
+          <IndividualNote key={note.id} note={note} toggleImportance={() => toggleImportance(note.id)} notes={notes} setNotes={setNotes} />
         ))}
       </ul>
       <AddNoteForm notes={notes} setNotes={setNotes} />
