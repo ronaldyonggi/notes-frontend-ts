@@ -1,28 +1,16 @@
 import { SyntheticEvent, useState } from 'react';
-import { Note } from '../../types/note';
-import noteService from '../../services/notes';
 
 interface AddNoteFormProps {
-  notes: Note[];
-  setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
+  handleAddNewNote: (content: string) => void;
 }
 
-const AddNoteForm = ({ notes, setNotes }: AddNoteFormProps) => {
+const AddNoteForm = ({ handleAddNewNote }: AddNoteFormProps) => {
   const [newNote, setNewNote] = useState('');
 
   const addNote = (event: SyntheticEvent) => {
     event.preventDefault();
-
-    const newNoteObject = {
-      content: newNote,
-      important: Math.random() < 0.5,
-    };
-
-    noteService
-      .create(newNoteObject)
-      .then((res) => setNotes(notes.concat(res.data)));
-
-    setNewNote('');
+    handleAddNewNote(newNote)
+    setNewNote('')
   };
 
   return (
