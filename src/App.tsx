@@ -55,14 +55,18 @@ const App = () => {
     }
   };
 
-  const handleDelete = (id: string) => {
-    noteService
-      .deleteNote(id)
-      .then(() => {
-        console.log(`Successfully deleted ${id}`);
-        setNotes(notes.filter((n) => n.id !== id));
-      })
-      .catch((error: Error) => console.error(error));
+  const handleDelete = async (id: string) => {
+    try {
+      await noteService.deleteNote(id)
+      setIsError(false)
+      setNotification(`Deleted!`)
+      setTimeout(() => {
+        setNotification('')
+      }, 6000);
+      setNotes(notes.filter(n => n.id !== id))
+    } catch(error) {
+      console.error(error)
+    }
   };
 
   return (
