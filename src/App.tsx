@@ -17,6 +17,28 @@ const App = () => {
     noteService.getAll().then((res) => setNotes(res.data));
   }, []);
 
+  const handleAddNewNote = async (content: string) => {
+    const newNoteObject = {
+      content,
+      important: Math.random() < 0.5
+    }
+
+    try {
+      const res = await noteService.create(newNoteObject)
+      setIsError(false)
+      setNotification(`Successfully added note "${content}"`)
+      setNotes(notes.concat(res.data))
+      setTimeout(() => {
+        setNotification('');
+      }, 6000);
+    } catch (error) {
+      setIsError(true)
+      setNotification(`${error.response.data.error}`)
+      setTimeout(() => {
+        setNotification('');
+      }, 6000);
+  }}
+
   const toggleImportance = (id: string): void => {
     // First find the note that matches the id
     const matchedNote = notes.find((note) => note.id === id);
@@ -62,7 +84,7 @@ const App = () => {
           />
         ))}
       </ul>
-      <AddNoteForm notes={notes} setNotes={setNotes} />
+      <AddNoteForm handleAddNewNote={handleAddNewNote} />
     </div>
   );
 };
