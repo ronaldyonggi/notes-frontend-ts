@@ -3,10 +3,13 @@ import AddNoteForm from './components/AddNoteForm/AddNoteForm';
 import { Note } from './types/note';
 import noteService from './services/notes';
 import IndividualNote from './components/IndividualNote/IndividualNote';
+import Notification from './components/Notification/Notification';
 
 const App = () => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [showAll, setShowAll] = useState(true);
+  const [notification, setNotification] = useState('');
+  const [isError, setIsError] = useState(false)
 
   const notesToShow = showAll ? notes : notes.filter((note) => note.important);
 
@@ -43,6 +46,7 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
+      <Notification message={notification} isError={isError} />
       <div>
         <button onClick={() => setShowAll(!showAll)}>
           show {showAll ? 'only important notes' : 'all'}
