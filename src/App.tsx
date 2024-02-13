@@ -31,12 +31,14 @@ const App = () => {
       setTimeout(() => {
         setNotification('');
       }, 6000);
+      return true // Indicates that submission is successful and input field may be reset
     } catch (error) {
       setIsError(true)
       setNotification(`${error.response.data.error}`)
       setTimeout(() => {
         setNotification('');
       }, 6000);
+      return false // Indicates that submission is failed. Input field shouldn't be reset
   }}
 
   const toggleImportance = (id: string): void => {
