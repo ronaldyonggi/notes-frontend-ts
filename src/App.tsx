@@ -17,6 +17,20 @@ const App = () => {
     noteService.getAll().then((res) => setNotes(res.data));
   }, []);
 
+  /**
+   * Helper function to set up notification and automatically resets it
+   * 
+   * @param message The message to display
+   * @param isItError Boolean that indicates whether the notification serves as an error
+   */
+  const notificationHelper = (message: string, isItError: boolean) => {
+    setNotification(message)
+    setIsError(isItError)
+    setTimeout(() => {
+      setNotification('');
+    }, 6000);
+  }
+
   const addNote = async (content: string) => {
     const newNoteObject = {
       content,
