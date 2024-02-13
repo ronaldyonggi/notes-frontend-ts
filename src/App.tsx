@@ -55,7 +55,7 @@ const App = () => {
     }
   };
 
-  const handleDelete = async (id: string) => {
+  const deleteNote = async (id: string) => {
     try {
       await noteService.deleteNote(id)
       setIsError(false)
@@ -84,7 +84,7 @@ const App = () => {
             key={note.id}
             note={note}
             toggleImportance={toggleImportance}
-            handleDelete={handleDelete}
+            deleteNote={deleteNote}
           />
         ))}
       </ul>
