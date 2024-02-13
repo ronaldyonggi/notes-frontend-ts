@@ -13,15 +13,15 @@ const IndividualNote = ({
 }: NoteProps) => {
   const label = note.important ? 'make not important' : 'make important';
 
-  const handleDeleteClick = () => {
-    handleDelete(note.id);
+  const handleDelete = () => {
+    deleteNote(note.id);
   };
 
   return (
     <li>
       {note.content}
       <button onClick={() => toggleImportance(note.id)}>{label}</button>
-      <button onClick={handleDeleteClick}>delete</button>
+      <button onClick={handleDelete}>delete</button>
     </li>
   );
 };
