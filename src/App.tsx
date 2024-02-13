@@ -39,19 +39,17 @@ const App = () => {
 
     try {
       const res = await noteService.create(newNoteObject)
-      setIsError(false)
-      setNotification(`Successfully added note "${content}"`)
       setNotes(notes.concat(res.data))
-      setTimeout(() => {
-        setNotification('');
-      }, 6000);
+      notificationHelper(
+        `Successfully added note "${content}"`,
+        false
+      )
       return true // Indicates that submission is successful and input field may be reset
     } catch (error) {
-      setIsError(true)
-      setNotification(`${error.response.data.error}`)
-      setTimeout(() => {
-        setNotification('');
-      }, 6000);
+      notificationHelper(
+        error.response.data.error,
+        true
+      )
       return false // Indicates that submission is failed. Input field shouldn't be reset
   }}
 
@@ -74,11 +72,10 @@ const App = () => {
   const deleteNote = async (id: string) => {
     try {
       await noteService.deleteNote(id)
-      setIsError(false)
-      setNotification(`Deleted!`)
-      setTimeout(() => {
-        setNotification('')
-      }, 6000);
+      notificationHelper(
+        'Deleted!',
+        false
+      )
       setNotes(notes.filter(n => n.id !== id))
     } catch(error) {
       console.error(error)
