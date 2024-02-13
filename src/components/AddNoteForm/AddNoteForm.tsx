@@ -1,15 +1,15 @@
 import { SyntheticEvent, useState } from 'react';
 
 interface AddNoteFormProps {
-  handleAddNewNote: (content: string) => void;
+  addNote: (content: string) => void;
 }
 
-const AddNoteForm = ({ handleAddNewNote }: AddNoteFormProps) => {
+const AddNoteForm = ({ addNote }: AddNoteFormProps) => {
   const [newNote, setNewNote] = useState('');
 
   const addNote = (event: SyntheticEvent) => {
     event.preventDefault();
-    handleAddNewNote(newNote)
+    addNote(newNote)
     setNewNote('')
   };
 
