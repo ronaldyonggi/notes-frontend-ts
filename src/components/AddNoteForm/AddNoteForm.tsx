@@ -7,14 +7,14 @@ interface AddNoteFormProps {
 const AddNoteForm = ({ addNote }: AddNoteFormProps) => {
   const [newNote, setNewNote] = useState('');
 
-  const addNote = (event: SyntheticEvent) => {
+  const handleAdd = (event: SyntheticEvent) => {
     event.preventDefault();
     addNote(newNote)
     setNewNote('')
   };
 
   return (
-    <form onSubmit={addNote}>
+    <form onSubmit={handleAdd}>
       <input
         type="text"
         value={newNote}
