@@ -7,10 +7,12 @@ interface AddNoteFormProps {
 const AddNoteForm = ({ addNote }: AddNoteFormProps) => {
   const [newNote, setNewNote] = useState('');
 
-  const handleAdd = (event: SyntheticEvent) => {
+  const handleAdd = async (event: SyntheticEvent) => {
     event.preventDefault();
-    addNote(newNote)
-    setNewNote('')
+    const submitSuccessful = await addNote(newNote)
+    if (submitSuccessful) {
+      setNewNote('')
+    }
   };
 
   return (
