@@ -17,7 +17,7 @@ const App = () => {
     noteService.getAll().then((res) => setNotes(res.data));
   }, []);
 
-  const handleAddNewNote = async (content: string) => {
+  const addNote = async (content: string) => {
     const newNoteObject = {
       content,
       important: Math.random() < 0.5
@@ -88,7 +88,7 @@ const App = () => {
           />
         ))}
       </ul>
-      <AddNoteForm handleAddNewNote={handleAddNewNote} />
+      <AddNoteForm addNote={addNote} />
     </div>
   );
 };
