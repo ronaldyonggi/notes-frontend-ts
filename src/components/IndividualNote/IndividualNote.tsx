@@ -3,13 +3,13 @@ import { Note } from '../../types/note';
 interface NoteProps {
   note: Note;
   toggleImportance: (id: string) => void;
-  handleDelete: (id: string) => void;
+  deleteNote: (id: string) => void;
 }
 
 const IndividualNote = ({
   note,
   toggleImportance,
-  handleDelete,
+  deleteNote,
 }: NoteProps) => {
   const label = note.important ? 'make not important' : 'make important';
 
