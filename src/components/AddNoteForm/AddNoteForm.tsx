@@ -1,7 +1,7 @@
 import { SyntheticEvent, useState } from 'react';
 
 interface AddNoteFormProps {
-  addNote: (content: string) => void;
+  addNote: (content: string) => Promise<boolean>;
 }
 
 const AddNoteForm = ({ addNote }: AddNoteFormProps) => {
