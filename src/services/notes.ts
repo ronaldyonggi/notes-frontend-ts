@@ -10,8 +10,10 @@ let token: string | null = null;
  * this setToken function to re-assign the above 'token' variable.
  * @param newToken the token fetched from logged-in user when log-in is successful
  */
-const setToken = (newToken: string) => {
-  token = `Bearer ${newToken}`
+const setToken = (newToken: string | null) => {
+  newToken ? 
+  token = `Bearer ${newToken}` :
+  token = null
 };
 
 const getAll = () => {
