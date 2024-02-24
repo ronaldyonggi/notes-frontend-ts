@@ -27,7 +27,7 @@ const create = async (newObject: object) => {
   }
 
   const res = await axios.post<Note>(baseUrl, newObject, config)
-  return res.data
+  return res
 }
 
 const update = (id: string, newObject: object) => {
