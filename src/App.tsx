@@ -4,12 +4,15 @@ import { Note } from './types/note';
 import noteService from './services/notes';
 import IndividualNote from './components/IndividualNote/IndividualNote';
 import Notification from './components/Notification/Notification';
+import Login from './components/Login/Login';
+import { User } from './types/user';
 
 const App = () => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [showAll, setShowAll] = useState(true);
   const [notification, setNotification] = useState('');
   const [isError, setIsError] = useState(false)
+  const [user, setUser] = useState<User | null>(null);
 
   const notesToShow = showAll ? notes : notes.filter((note) => note.important);
 
@@ -86,6 +89,14 @@ const App = () => {
     <div>
       <h1>Notes</h1>
       <Notification message={notification} isError={isError} />
+      { user ? 
+        <div>
+          <p>{user.name} logged in</p>
+          <AddNoteForm addNote={addNote} />
+        </div>
+      : 
+        <Login notificationHelper={notificationHelper} setUser={setUser} />
+      }
       <div>
         <button onClick={() => setShowAll(!showAll)}>
           show {showAll ? 'only important notes' : 'all'}
@@ -101,7 +112,6 @@ const App = () => {
           />
         ))}
       </ul>
-      <AddNoteForm addNote={addNote} />
     </div>
   );
 };
