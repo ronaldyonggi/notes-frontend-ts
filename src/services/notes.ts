@@ -2,12 +2,23 @@ import axios from "axios"
 import { Note } from "../types/note"
 const baseUrl = 'http://localhost:3001/api/notes'
 
+let token: string | null = null;
+
+
 const getAll = () => {
   return axios.get<Note[]>(baseUrl)
 }
 
-const create = (newObject: object) => {
-  return axios.post<Note>(baseUrl, newObject)
+const create = async (newObject: object) => {
+  // Sets the token to the Authorization header
+  const config = {
+    headers: {
+      Authorization: token
+    }
+  }
+
+  const res = await axios.post<Note>(baseUrl, newObject, config)
+  return res.data
 }
 
 const update = (id: string, newObject: object) => {
