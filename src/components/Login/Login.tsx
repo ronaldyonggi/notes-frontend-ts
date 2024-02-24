@@ -19,6 +19,9 @@ const Login = ({ notificationHelper, setUser } : LoginProps) => {
         username, password
       });
       
+      window.localStorage.setItem(
+        'loggedNoteappUser', JSON.stringify(loginUser)
+      );
       noteService.setToken(loginUser.token);
       setUser(loginUser);
       setUsername('')
