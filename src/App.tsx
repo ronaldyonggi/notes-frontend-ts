@@ -24,6 +24,19 @@ const App = () => {
   }, []);
 
   /**
+   * Fetch login details from browser local storage if there's one in the first place.
+   */
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+    // If login details is found, set user and set token that user's token
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      noteService.setToken(user.token)
+    }
+  }, []);
+
+  /**
    * Helper function to set up notification and automatically resets it
    * 
    * @param message The message to display
