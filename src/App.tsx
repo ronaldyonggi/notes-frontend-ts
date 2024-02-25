@@ -115,7 +115,9 @@ const App = () => {
         <div>
           <p>{user.name} logged in</p>
           <button onClick={handleLogout}>Logout</button>
-          <AddNoteForm addNote={addNote} />
+          <Togglable buttonLabel='Add a Note'>
+            <AddNoteForm addNote={addNote} />
+          </Togglable>
         </div>
       : 
         <Login notificationHelper={notificationHelper} setUser={setUser} />
