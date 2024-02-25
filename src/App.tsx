@@ -120,7 +120,9 @@ const App = () => {
           </Togglable>
         </div>
       : 
-        <Login notificationHelper={notificationHelper} setUser={setUser} />
+        <Togglable buttonLabel='Open Login'>
+          <Login notificationHelper={notificationHelper} setUser={setUser} />
+        </Togglable>
       }
       <div>
         <button onClick={() => setShowAll(!showAll)}>
