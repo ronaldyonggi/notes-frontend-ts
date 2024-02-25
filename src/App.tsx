@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import AddNoteForm from './components/AddNoteForm/AddNoteForm';
+import NoteForm from './components/NoteForm/NoteForm';
 import { Note } from './types/note';
 import noteService from './services/notes';
 import IndividualNote from './components/IndividualNote/IndividualNote';
@@ -117,7 +117,7 @@ const App = () => {
           <p>{user.name} logged in</p>
           <button onClick={handleLogout}>Logout</button>
           <Togglable buttonLabel='Add a Note'>
-            <AddNoteForm addNote={addNote} />
+            <NoteForm addNote={addNote} />
           </Togglable>
         </div>
       : 
