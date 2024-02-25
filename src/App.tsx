@@ -6,6 +6,7 @@ import IndividualNote from './components/IndividualNote/IndividualNote';
 import Notification from './components/Notification/Notification';
 import Login from './components/Login/Login';
 import { User } from './types/user';
+import Togglable from './components/Togglable/Togglable';
 
 const App = () => {
   const [notes, setNotes] = useState<Note[]>([]);
