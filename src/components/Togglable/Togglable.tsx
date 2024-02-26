@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { forwardRef, useImperativeHandle, useState } from "react"
 
 interface TogglableProps {
   buttonLabel: string;
@@ -12,6 +12,10 @@ const Togglable = forwardRef((props: TogglableProps, refs) => {
   // const showWhenVisible = { display: visible ? '' : 'none'};
 
   const toggleVisibility = () => setVisible(!visible);
+
+  useImperativeHandle(refs, () => {
+    return { toggleVisibility }
+  })
 
   // return (
   //   <div>
@@ -38,5 +42,6 @@ const Togglable = forwardRef((props: TogglableProps, refs) => {
       } 
     </div>
   )
-}
+})
+
 export default Togglable
