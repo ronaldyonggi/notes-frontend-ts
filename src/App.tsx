@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import NoteForm from './components/NoteForm/NoteForm';
 import { Note } from './types/note';
 import noteService from './services/notes';
@@ -14,6 +14,7 @@ const App = () => {
   const [notification, setNotification] = useState('');
   const [isError, setIsError] = useState(false)
   const [user, setUser] = useState<User | null>(null);
+  const noteFormRef = useRef();
 
   const notesToShow = showAll ? notes : notes.filter((note) => note.important);
 
@@ -64,6 +65,7 @@ const App = () => {
         `Successfully added note "${content}"`,
         false
       )
+      noteFormRef.current!.toggleVisibility()
       return true // Indicates that submission is successful and input field may be reset
     } catch (error) {
       notificationHelper(
@@ -116,7 +118,7 @@ const App = () => {
         <div>
           <p>{user.name} logged in</p>
           <button onClick={handleLogout}>Logout</button>
-          <Togglable buttonLabel='Add a Note'>
+          <Togglable buttonLabel='Add a Note' ref={noteFormRef}>
             <NoteForm addNote={addNote} />
           </Togglable>
         </div>
