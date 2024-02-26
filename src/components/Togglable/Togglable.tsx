@@ -5,7 +5,7 @@ interface TogglableProps {
   children: JSX.Element | JSX.Element[];
 }
 
-const Togglable = (props : TogglableProps) => {
+const Togglable = forwardRef((props: TogglableProps, refs) => {
   const [visible, setVisible] = useState(false)
 
   // const hideWhenVisible = { display: visible ? 'none' : ''};
