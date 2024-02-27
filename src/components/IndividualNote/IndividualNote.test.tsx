@@ -9,8 +9,11 @@ test('renders content', () => {
     id: '21941'
   };
 
+  // mock function to simulate an event from an action
   const mockHandler = jest.fn()
 
+  // Here toggleImportance and deleteNote button are both assigned mockHandler. Thus when the button for toggling importance or 
+  // deleting note is clicked, it just calls the mockHandler. It doesn't actually do anything.
   render(<IndividualNote note={note} toggleImportance={mockHandler} deleteNote={mockHandler}/>)
 
   const element = screen.getByText('Component testing is done with react-testing-library');
