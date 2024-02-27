@@ -18,7 +18,7 @@ const IndividualNote = ({
   };
 
   return (
-    <li>
+    <li className='note'>
       {note.content}
       <button onClick={() => toggleImportance(note.id)}>{label}</button>
       <button onClick={handleDelete}>delete</button>
