@@ -16,4 +16,12 @@ test('renders content', () => {
   const element = screen.getByText('Component testing is done with react-testing-library');
   expect(element).toBeDefined();
 
+
+  /**
+   * Another way of finding rendered elements is using CSS selectors
+   */
+  // const { container } = render(<IndividualNote note={note} toggleImportance={mockHandler} deleteNote={mockHandler}/>)
+  // const div = container.querySelector('.note');
+  // expect(div).toHaveTextContent('Component testing is done with react-testing-library');
+
 })
