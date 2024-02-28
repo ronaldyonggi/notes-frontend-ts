@@ -9,7 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "server": "json-server -p3001 --watch db.json",
-    "test": "jest"
+    "test": "jest",
+    "coverage": "jest -- --coverage --collectCoverageFrom='src/**/*.{tsx,ts}'"
   },
   "dependencies": {
     "axios": "^1.6.5",
