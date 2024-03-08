@@ -12,9 +12,9 @@ const App = () => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [showAll, setShowAll] = useState(true);
   const [notification, setNotification] = useState('');
-  const [isError, setIsError] = useState(false)
+  const [isError, setIsError] = useState(false);
   const [user, setUser] = useState<User | null>(null);
-  const noteFormRef = useRef();
+  const noteFormRef = useRef(null);
 
   const notesToShow = showAll ? notes : notes.filter((note) => note.important);
 
@@ -29,51 +29,46 @@ const App = () => {
    * Fetch login details from browser local storage if there's one in the first place.
    */
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser');
     // If login details is found, set user and set token that user's token
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      noteService.setToken(user.token)
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+      noteService.setToken(user.token);
     }
   }, []);
 
   /**
    * Helper function to set up notification and automatically resets it
-   * 
+   *
    * @param message The message to display
    * @param isItError Boolean that indicates whether the notification serves as an error
    */
   const notificationHelper = (message: string, isItError: boolean) => {
-    setNotification(message)
-    setIsError(isItError)
+    setNotification(message);
+    setIsError(isItError);
     setTimeout(() => {
       setNotification('');
     }, 6000);
-  }
+  };
 
   const addNote = async (content: string) => {
     const newNoteObject = {
       content,
-      important: Math.random() < 0.5
-    }
+      important: Math.random() < 0.5,
+    };
 
     try {
-      const res = await noteService.create(newNoteObject)
-      setNotes(notes.concat(res.data))
-      notificationHelper(
-        `Successfully added note "${content}"`,
-        false
-      )
-      noteFormRef.current!.toggleVisibility()
-      return true // Indicates that submission is successful and input field may be reset
+      const res = await noteService.create(newNoteObject);
+      setNotes(notes.concat(res.data));
+      notificationHelper(`Successfully added note "${content}"`, false);
+      noteFormRef.current!.toggleVisibility();
+      return true; // Indicates that submission is successful and input field may be reset
     } catch (error) {
-      notificationHelper(
-        error.response.data.error,
-        true
-      )
-      return false // Indicates that submission is failed. Input field shouldn't be reset
-  }}
+      notificationHelper(error.response.data.error, true);
+      return false; // Indicates that submission is failed. Input field shouldn't be reset
+    }
+  };
 
   const toggleImportance = (id: string): void => {
     // First find the note that matches the id
@@ -93,40 +88,37 @@ const App = () => {
 
   const deleteNote = async (id: string) => {
     try {
-      await noteService.deleteNote(id)
-      notificationHelper(
-        'Deleted!',
-        false
-      )
-      setNotes(notes.filter(n => n.id !== id))
-    } catch(error) {
-      console.error(error)
+      await noteService.deleteNote(id);
+      notificationHelper('Deleted!', false);
+      setNotes(notes.filter((n) => n.id !== id));
+    } catch (error) {
+      console.error(error);
     }
   };
 
   const handleLogout = () => {
     noteService.setToken(null);
     setUser(null);
-    window.localStorage.removeItem('loggedNoteappUser')
-  }
+    window.localStorage.removeItem('loggedNoteappUser');
+  };
 
   return (
     <div>
       <h1>Notes</h1>
       <Notification message={notification} isError={isError} />
-      { user ? 
+      {user ? (
         <div>
           <p>{user.name} logged in</p>
           <button onClick={handleLogout}>Logout</button>
-          <Togglable buttonLabel='Add a Note' ref={noteFormRef}>
+          <Togglable buttonLabel="Add a Note" ref={noteFormRef}>
             <NoteForm addNote={addNote} />
           </Togglable>
         </div>
-      : 
-        <Togglable buttonLabel='Open Login'>
+      ) : (
+        <Togglable buttonLabel="Open Login">
           <Login notificationHelper={notificationHelper} setUser={setUser} />
         </Togglable>
-      }
+      )}
       <div>
         <button onClick={() => setShowAll(!showAll)}>
           show {showAll ? 'only important notes' : 'all'}
