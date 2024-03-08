@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import NoteForm from './components/NoteForm/NoteForm';
 import { Note } from './types/note';
 import noteService from './services/notes';
-import IndividualNote from './components/IndividualNote/IndividualNote';
+import NoteItem from './components/NoteItem/NoteItem';
 import Notification from './components/Notification/Notification';
 import Login from './components/Login/Login';
 import { User } from './types/user';
@@ -134,7 +134,7 @@ const App = () => {
       </div>
       <ul>
         {notesToShow.map((note) => (
-          <IndividualNote
+          <NoteItem
             key={note.id}
             note={note}
             toggleImportance={toggleImportance}
