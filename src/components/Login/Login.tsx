@@ -40,13 +40,13 @@ const Login = ({ notificationHelper, setUser } : LoginProps) => {
       <form onSubmit={handleLogin}>
         <div>
           username
-          <input type="text" name="username" value={username} onChange={e => setUsername(e.target.value)} />
+          <input id="username" type="text" name="username" value={username} onChange={e => setUsername(e.target.value)} />
         </div>
         <div>
           password
-          <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
+          <input id="password" type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
         </div>
-        <button>Login</button>
+        <button id="login-button" type="submit">Login</button>
       </form>
     </div>
   )
