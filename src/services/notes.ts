@@ -43,8 +43,15 @@ const update = async (id: string, newObject: object) => {
   return res
 }
 
-const deleteNote = (id: string) => {
-  return axios.delete<Note>(`${baseUrl}/${id}`)
+const deleteNote = async (id: string) => {
+  const config = {
+    headers: {
+      Authorization: token
+    }
+  }
+
+  const res = await axios.delete<Note>(`${baseUrl}/${id}`, config)
+  return res
 }
 
 export default {
