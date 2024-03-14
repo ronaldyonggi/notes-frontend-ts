@@ -32,8 +32,15 @@ const create = async (newObject: object) => {
   return res
 }
 
-const update = (id: string, newObject: object) => {
-  return axios.put<Note>(`${baseUrl}/${id}`, newObject)
+const update = async (id: string, newObject: object) => {
+  const config = {
+    headers: {
+      Authorization: token
+    }
+  }
+  
+  const res = await axios.put<Note>(`${baseUrl}/${id}`, newObject, config)
+  return res
 }
 
 const deleteNote = (id: string) => {
