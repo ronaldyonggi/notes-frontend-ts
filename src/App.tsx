@@ -7,6 +7,7 @@ import Notification from './components/Notification/Notification';
 import Login from './components/Login/Login';
 import { User } from './types/user';
 import Togglable from './components/Togglable/Togglable';
+import { AxiosError } from 'axios';
 
 const App = () => {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -64,8 +65,10 @@ const App = () => {
       notificationHelper(`Successfully added note "${content}"`, false);
       noteFormRef.current!.toggleVisibility();
       return true; // Indicates that submission is successful and input field may be reset
-    } catch (error) {
-      notificationHelper(error.response.data.error, true);
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        notificationHelper(error.response!.data.error, true);
+      }
       return false; // Indicates that submission is failed. Input field shouldn't be reset
     }
   };
